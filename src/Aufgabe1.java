@@ -7,7 +7,28 @@ import java.util.Arrays;
 public class Aufgabe1 {
 
     private static void shiftLines(int[][] workArray) {
-        // TODO: Implementieren Sie hier Ihre Lösung für die Methode
+        int[] smallArray = workArray[0];
+        boolean sameLength = true;
+        int indexSmallest = 0;
+        for (int i = 0;  i < workArray.length; i++) {
+            if (workArray[i].length < smallArray.length) {
+                smallArray = workArray[i];
+                indexSmallest = i;
+                sameLength = false;
+            }
+        }
+
+        if (sameLength) {
+            for (int i = 1; i < workArray.length; i++) {
+                workArray[i-1] = workArray[i];
+            }
+            workArray[workArray.length-1] = smallArray;
+        } else{
+          int[] tmpArray = workArray[0];
+          workArray[0] = smallArray;
+          workArray[indexSmallest] = tmpArray;
+        }
+
     }
 
     //Vorgegebene Methode - BITTE NICHT VERÄNDERN!
