@@ -7,7 +7,31 @@ import java.util.Arrays;
 public class Aufgabe2 {
 
     private static void reformatArray(int[][] workArray) {
-        // TODO: Implementieren Sie hier Ihre Lösung für die Methode
+        for (int i = 0; i < workArray.length; i++) {
+            int[] newArray = new int[workArray[i].length + 1];
+            int oddIndex = 0;
+            int evenIndex = 0;
+            int sum = 0;
+            for (int x:
+                 workArray[i]) {
+                if (x % 2 == 0){
+                    oddIndex++;
+                }
+            }
+            for (int y :
+                    workArray[i]) {
+                if (y % 2 == 0){
+                    newArray[evenIndex] = y;
+                    evenIndex++;
+                } else{
+                    newArray[oddIndex] = y;
+                    oddIndex++;
+                }
+                sum += y;
+            }
+            newArray[newArray.length - 1] = sum;
+            workArray[i] = newArray;
+        }
     }
 
     //Vorgegebene Methode - BITTE NICHT VERÄNDERN!
