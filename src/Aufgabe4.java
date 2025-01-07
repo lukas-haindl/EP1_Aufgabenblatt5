@@ -11,7 +11,14 @@ public class Aufgabe4 {
     private static final int squareSize = 50;
 
     private static void floodFill(CodeDraw myDrawObj, int[][] picArray, int sy, int sx) {
-        // TODO: Implementieren Sie hier Ihre Lösung für die Methode
+        if (sy >= 0 && sy < picArray.length && sx >= 0 && sx < picArray[0].length && picArray[sy][sx] == 0) {
+            picArray[sy][sx] = 1;
+            myDrawObj.drawPoint(sx, sy);
+            floodFill(myDrawObj, picArray, sy + 1, sx);
+            floodFill(myDrawObj, picArray, sy - 1, sx);
+            floodFill(myDrawObj, picArray, sy, sx + 1);
+            floodFill(myDrawObj, picArray, sy, sx - 1);
+        }
     }
 
 
@@ -20,7 +27,6 @@ public class Aufgabe4 {
         int x1 = xClick[1];
         int y0 = yClick[0];
         int y1 = yClick[1];
-
         int dx = Math.abs(x1 - x0);
         int dy = Math.abs(y1 - y0);
         int xd = x0 < x1 ? 1 : -1;
@@ -99,30 +105,35 @@ public class Aufgabe4 {
                     colorChosen = true;
                 }
                 //Button BLUE
-                //**********************************************
-                //TODO: Implementieren Sie hier Ihre Lösung für den Klick auf die blaue Fläche
-                //**********************************************
+                else if (mouseY >= buttonCounter++ * squareSize && mouseY < buttonCounter * (squareSize - 1) && mouseX >= width - squareSize && mouseX < width - 1) {
+                    myDrawObj.setColor(Palette.BLUE);
+                    colorChosen = true;
+                }
 
                 //Button YELLOW
-                //**********************************************
-                //TODO: Implementieren Sie hier Ihre Lösung für den Klick auf die gelbe Fläche
-                //**********************************************
+                else if (mouseY >= buttonCounter++ * squareSize && mouseY < buttonCounter * (squareSize - 1) && mouseX >= width - squareSize && mouseX < width - 1) {
+                    myDrawObj.setColor(Palette.YELLOW);
+                    colorChosen = true;
+                }
 
                 //Button CYAN
-                //**********************************************
-                //TODO: Implementieren Sie hier Ihre Lösung für den Klick auf die cyanfarbene Fläche
-                //**********************************************
+                else if (mouseY >= buttonCounter++ * squareSize && mouseY < buttonCounter * (squareSize - 1) && mouseX >= width - squareSize && mouseX < width - 1) {
+                    myDrawObj.setColor(Palette.CYAN);
+                    colorChosen = true;
+                }
                 else {
                     if (colorChosen) {
-                        //**********************************************
-                        //TODO: Ergänzen Sie den fehlenden Code (Zustand: Fläche füllen)
-                        //**********************************************
+                        floodFill(myDrawObj, picArray, mouseY, mouseX);
+                        colorChosen = false;
+                        myDrawObj.show();
                     } else {
                         myDrawObj.setLineWidth(2);
                         myDrawObj.setColor(Palette.BLACK);
-                        //**********************************************
-                        //TODO: Ergänzen Sie den fehlenden Code (Zustand: Linien zeichnen)
-                        //**********************************************
+                        yClick[1] = mouseY;
+                        xClick[1] = mouseX;
+                        paintLine(myDrawObj, picArray, yClick, xClick);
+                        yClick[0] = mouseY;
+                        xClick[0] = mouseX;
                         myDrawObj.setLineWidth(1);
                         myDrawObj.show();
                     }
